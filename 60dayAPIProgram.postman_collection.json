@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "b926772b-370a-41fa-a52b-70ceea76b35d",
+		"name": "60dayAPIProgram",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "day1",
+			"item": [
+				{
+					"name": "covid",
+					"item": [
+						{
+							"name": "indiastatus",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "687c9a40-84e6-49f0-85e0-c2113556d176",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1/india",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1",
+										"india"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "WorldStats",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4b290ea0-13b9-47d2-acea-4d0b1f0e7364",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5HighestNewCases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fc3ceb6e-fa89-42ec-9121-b826e3ab3f06",
+										"exec": [
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"var count = resp.data.rows.length;\r",
+											"//console.log(count);\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_cases = entry.new_cases;\r",
+											"    if(country != \"World\"){\r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"     }   \r",
+											"\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?order=new_cases&how=dsc&limit=6&page=1",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "new_cases"
+										},
+										{
+											"key": "how",
+											"value": "dsc"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5LowestNewDeathCases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "59a17fc2-8ef8-4fdf-9f3e-6de5b56ba7e6",
+										"exec": [
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"var count = resp.data.rows.length;\r",
+											"//console.log(count);\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_cases = entry.new_deaths;\r",
+											"    \r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"     \r",
+											"\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?order=new_deaths&how=asc&limit=5&page=1",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "new_deaths"
+										},
+										{
+											"key": "how",
+											"value": "asc"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
