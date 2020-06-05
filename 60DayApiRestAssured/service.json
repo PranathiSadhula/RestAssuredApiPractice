@@ -1,0 +1,8 @@
+{
+  "name": "Pranathi 60day API Service -RA dataprovider",
+  "description": "60Day API service provides practice problems 2 per week for 60days -RA",
+  "type": "SERVICE",
+  "category": "SOFTWARE",
+  "image_url": "https://example.com/streaming.jpg",
+  "home_url": "https://example.com/home"
+}
