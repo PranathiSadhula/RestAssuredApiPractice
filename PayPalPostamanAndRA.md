@@ -72,7 +72,7 @@
                     - pm.test used to Verify the response contains type as expected"
                     - pm.test used to "Successful POST request status code expected 200"
       
-      3. ListProducts - Lists created products # Verify that the created products are listed
+3. ListProducts - Lists created products # Verify that the created products are listed
           
                     Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
                     Request method type - GET
@@ -133,4 +133,61 @@
                       ]
                     }
 
-                                        
+ # Restassured Implementation for scenario 2) Create multiple products [using dataprovider + RestAssured]
+                     60DayApiRestAssured is maven project which is build by using 
+                     RestAssured, java and testng
+		src/main/java/week1/day1/paypal/ is the source folder for paypal implementation
+1. src/main/java/week1/day1/paypal/PayPalBasics.java 
+                    
+                    public String paypalBearerAuth -- so that it can be used by any java class which extends PayPalBasics.java 
+                    public ArrayList<String> productIds = new ArrayList<String>() -- productid of created app are stored here
+                    - Testng annotations used 
+                              @BeforeSuite 
+                                  Request end point (RestAssured.baseURI)  - https://api.sandbox.paypal.com/v1/oauth2/token
+                                  Request Authorization - Basic -username = clientID and pasword = secret  
+                                         RestAssured
+				.preemptive()
+				.basic("username","pswd")
+                                  Request params : paramsMap.put("grant_type", "client_credentials")
+                                  Request method type - post
+                                  Expected Response fields :
+                                          "access_token": "<access token>", -- stored in variable "paypalBearerAuth" 
+                                          "token_type": "Bearer",
+                                      
+                              @DataProvider(name="createpaypalapp")
+                                   Using java.io.FilenameFilter, retrived  no.of "*.json" files from given projectworkspace
+                                   File[] jsonFiles = projectWorkSpace.listFiles(new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".json");
+				}
+			     });
+                                   This numOfJsonFiles is passed to build String[] size to return json file path
+
+2. src/main/java/week1/day1/paypal/CreateProductwithbody.java 
+          
+          extends PayPalBasics -- for Bearer token "String paypalBearerAuth "
+          Request end point -
+          Request Authorization -
+          Request Method type - POST
+          Request Headers -
+          Request Body - sample request : 
+                    {
+                      "name": "body within body",
+                      "description": "request body given in body()",
+                      "type": "SERVICE",
+                      "category": "SOFTWARE",
+                      "image_url": "https://example.com/streaming.jpg",
+                      "home_url": "https://example.com/home"
+                    }
+          Request Content type - ContentType.JSON
+          Response :
+                    verify Expected status code : 201 
+                    assertTrue(resp.getStatusCode() == 201, "Expected status code : 201 and actual :" + resp.getStatusCode());
+ 
+                    verify Expected response time < 600 and actual response time
+                    assertTrue(resp.getTime()<  600,"Expected response time < 600 and actual :" + resp.getTime());
+		
+                    verify Expected content type = JSON and actual response content type
+                    assertTrue(resp.contentType().toLowerCase().contains("json"),"Expected content type = JSON and actual :" + resp.contentType());
+          
+          
