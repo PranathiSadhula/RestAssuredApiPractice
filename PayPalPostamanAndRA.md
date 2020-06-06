@@ -1,20 +1,20 @@
-#API document  : https://developer.paypal.com/docs/api/overview/
-Manual/PreReq Steps :
-step 1: Create an account using https://developer.paypal.com/home/
-step 2 : Login into Developer dashboard using above created account credentials
-step 3 : Create a new app
-step 4 : Edit created app and retrive client_id and secret
+# API document  : https://developer.paypal.com/docs/api/overview/
+          Manual/PreReq Steps :
+          step 1: Create an account using https://developer.paypal.com/home/
+          step 2 : Login into Developer dashboard using above created account credentials
+          step 3 : Create a new app
+          step 4 : Edit created app and retrive client_id and secret
 
-#Postman Implementation 
+# Postman Implementation 
 1. PaypalGetAccessCode - Request to get access token 
-          Request end point - https://api.sandbox.paypal.com/v1/oauth2/token
-          Request Authorization - Basic -username = clientID and pasword = secret
-          Request Body - x-www-form-urlencoded - grant_type : client_credentials
-          Request method type - post
-          Expected Response fields :
-            "access_token": "<access token>",
-            "token_type": "Bearer",
-          Expected Response status code : 200
+                    Request end point - https://api.sandbox.paypal.com/v1/oauth2/token
+                    Request Authorization - Basic -username = clientID and pasword = secret
+                    Request Body - x-www-form-urlencoded - grant_type : client_credentials
+                    Request method type - post
+                    Expected Response fields :
+                      "access_token": "<access token>",
+                      "token_type": "Bearer",
+                    Expected Response status code : 200
  2. CreateNewProduct - Creates new product and verifies that product is created
           Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
           Request Authorization - Bearer - ABove retrived Access_token used 
