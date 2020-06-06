@@ -86,26 +86,26 @@ pm.test("verify content type of response as json", function () {
 
 
 # Rest Assured IMPLEMENTATION FOR COVID-19 PROBLEM STATEMENT - 60DayApiRestAssured is maven project which is build by using 
-# RestAssured/java/testng
-# src/main/java/week1/day1/covid/ is the source folder for Covid-19 implementation
+			RestAssured/java/testng
+			src/main/java/week1/day1/covid/ is the source folder for Covid-19 implementation
 
 # Scenario :1 Find the Status of your Country - done
 # src/main/java/week1/day1/covid/CountryStatsForIndia.java 
 request end point  - https://covid-19.dataflowkit.com/v1/india
-This is straight forward request which rerturns expected statistics of country - india
-**request type method  - get
-*TestNg - @Test is used to execute test scenario
-*expected response code - 200
-*expected response time < 600
-*expected content type - json
+This is straight forward request which rerturns expected statistics of country - india \n
+			**request type method  - get
+			*TestNg - @Test is used to execute test scenario
+			*expected response code - 200
+			*expected response time < 600
+			*expected content type - json
 
 # 2. Find the top 5 Country with Highest New Cases in recent day :
 request end point  - https://covid-19.dataflowkit.com/v1
-**request type method  - get
-*TestNg - @Test is used to execute test scenario
-*expected response code - 200
-*expected response time < 600
-*expected content type - json
+			**request type method  - get
+			*TestNg - @Test is used to execute test scenario
+			*expected response code - 200
+			*expected response time < 600
+			*expected content type - json
 *Java concepts used 
 Collections : 
 
@@ -119,11 +119,11 @@ Collections :
 # 3. Find the top 5 Country with lowest New Deaths Cases for recent day :
 https://covid-19.dataflowkit.com/v1
 request end point  - https://covid-19.dataflowkit.com/v1
-**request type method  - get
-*TestNg - @Test is used to execute test scenario
-*expected response code - 200
-*expected response time < 600
-*expected content type - json
+			**request type method  - get
+			*TestNg - @Test is used to execute test scenario
+			*expected response code - 200
+			*expected response time < 600
+			*expected content type - json
 *Java concepts used 
 Collections : 
 
