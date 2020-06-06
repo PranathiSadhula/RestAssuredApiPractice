@@ -52,13 +52,14 @@
                       ]
                   }
                 
-# a) Verify the status code for create product request
+          # a) Verify the status code for create product request
           pm.test("Successful POST request", function () {
               pm.expect(pm.response.code).to.be.oneOf([201,202]);
           });
-# b) Verify the response contains category and type as expected
-          Since Response for request end point above with method type -post doesnt returns catogery and type fields but on requesting with method type get
-                    "href": "https://api.sandbox.paypal.com/v1/catalogs/products/prdo_id" in response gives catogery and type fields
+          # b) Verify the response contains category and type as expected
+          Since Response for request end point(https://api.sandbox.paypal.com/v1/catalogs/products) with method type - post doesnt                    returns catogery and type fields
+          Requesting below url from above response with method type get returns catogery and type fields as expected 
+                    "href": "https://api.sandbox.paypal.com/v1/catalogs/products/prdo_id" 
                     -pm.sendRequest  used to hit 
                         - url:"https://api.sandbox.paypal.com/v1/catalogs/products/"+resp.id,
                         - method: 'GET'
