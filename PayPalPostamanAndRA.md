@@ -19,6 +19,7 @@
  2. CreateNewProduct - Creates new product and verifies that product is created
  
           Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
+          Request method type - post
           Request Authorization - Bearer - ABove retrived Access_token used 
           Request Body - json format - 
                   Sample request
@@ -30,7 +31,7 @@
                       "image_url": "https://example.com/streaming.jpg",
                       "home_url": "https://example.com/home"
                     }
-          Request method type - post
+        
           Expected Response Mandatory fields :
                   Sample response :
                   {
@@ -69,4 +70,67 @@
 
                     - pm.test used to "Verify the response contains category as expected"
                     - pm.test used to Verify the response contains type as expected"
-                    - pm.test used to "Successful POST request status code expected 200",
+                    - pm.test used to "Successful POST request status code expected 200"
+      
+      3. ListProducts - Lists created products # Verify that the created products are listed
+          
+                    Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
+                    Request method type - GET
+                    Request Authorization - Bearer - ABove retrived Access_token used 
+                    Request Query params -
+                              page : default value 1 --- returns page 1 of response
+                                        example page : 2 --- returns 2nd page of response
+                              page_size : default value 10 --- returns 10 records per page
+                                        example page_size 50 --- returns 50 records per page
+                     Expected sample response 
+                     {
+                      "total_items": 20,
+                      "total_pages": 10,
+                      "products": [
+                        {
+                          "id": "72255d4849af8ed6e0df1173",
+                          "name": "Video Streaming Service",
+                          "description": "Video streaming service",
+                          "create_time": "2018-12-10T21:20:49Z",
+                          "links": [
+                            {
+                              "href": "https://api.paypal.com/v1/catalogs/products/72255d4849af8ed6e0df1173",
+                              "rel": "self",
+                              "method": "GET"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "PROD-XYAB12ABSB7868434",
+                          "name": "Video Streaming Service",
+                          "description": "Audio streaming service",
+                          "create_time": "2018-12-10T21:20:49Z",
+                          "links": [
+                            {
+                              "href": "https://api.paypal.com/v1/catalogs/products/125d4849af8ed6e0df18",
+                              "rel": "self",
+                              "method": "GET"
+                            }
+                          ]
+                        }
+                      ],
+                      "links": [
+                        {
+                          "href": "https://api.paypal.com/v1/catalogs/products?page_size=2&page=1",
+                          "rel": "self",
+                          "method": "GET"
+                        },
+                        {
+                          "href": "https://api.paypal.com/v1/catalogs/products?page_size=2&page=2",
+                          "rel": "next",
+                          "method": "GET"
+                        },
+                        {
+                          "href": "https://api.paypal.com/v1/catalogs/products?page_size=2&page=10",
+                          "rel": "last",
+                          "method": "GET"
+                        }
+                      ]
+                    }
+
+                                        
