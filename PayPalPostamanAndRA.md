@@ -6,16 +6,18 @@
           step 4 : Edit created app and retrive client_id and secret
 
 # Postman Implementation 
-1. PaypalGetAccessCode - Request to get access token 
+1. PaypalGetAccessCode - Request to get access token
+
                     Request end point - https://api.sandbox.paypal.com/v1/oauth2/token
                     Request Authorization - Basic -username = clientID and pasword = secret
                     Request Body - x-www-form-urlencoded - grant_type : client_credentials
                     Request method type - post
                     Expected Response fields :
-                      "access_token": "<access token>",
-                      "token_type": "Bearer",
+                                          "access_token": "<access token>",
+                                          "token_type": "Bearer",
                     Expected Response status code : 200
  2. CreateNewProduct - Creates new product and verifies that product is created
+ 
           Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
           Request Authorization - Bearer - ABove retrived Access_token used 
           Request Body - json format - 
@@ -51,19 +53,19 @@
                   }
                 
 # a) Verify the status code for create product request
-pm.test("Successful POST request", function () {
-    pm.expect(pm.response.code).to.be.oneOf([201,202]);
-});
+          pm.test("Successful POST request", function () {
+              pm.expect(pm.response.code).to.be.oneOf([201,202]);
+          });
 # b) Verify the response contains category and type as expected
-Since Response for request end point above with method type -post doesnt returns catogery and type fields but on requesting with method type get
-          "href": "https://api.sandbox.paypal.com/v1/catalogs/products/prdo_id" in response gives catogery and type fields
-          -pm.sendRequest  used to hit 
-              - url:"https://api.sandbox.paypal.com/v1/catalogs/products/"+resp.id,
-              - method: 'GET'
-              - header: {
-                      Authorization: "Bearer "+ pm.variables.get("paypalBearerAuth")
-                      }
-        
-          - pm.test used to "Verify the response contains category as expected"
-          - pm.test used to Verify the response contains type as expected"
-          - pm.test used to "Successful POST request status code expected 200",
+          Since Response for request end point above with method type -post doesnt returns catogery and type fields but on requesting with method type get
+                    "href": "https://api.sandbox.paypal.com/v1/catalogs/products/prdo_id" in response gives catogery and type fields
+                    -pm.sendRequest  used to hit 
+                        - url:"https://api.sandbox.paypal.com/v1/catalogs/products/"+resp.id,
+                        - method: 'GET'
+                        - header: {
+                                Authorization: "Bearer "+ pm.variables.get("paypalBearerAuth")
+                                }
+
+                    - pm.test used to "Verify the response contains category as expected"
+                    - pm.test used to Verify the response contains type as expected"
+                    - pm.test used to "Successful POST request status code expected 200",
