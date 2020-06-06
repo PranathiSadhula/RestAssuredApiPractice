@@ -165,11 +165,13 @@
 
 2. src/main/java/week1/day1/paypal/CreateProductwithbody.java 
           
-          extends PayPalBasics -- for Bearer token "String paypalBearerAuth "
-          Request end point -
-          Request Authorization -
+          extends PayPalBasics -- for Bearer token "String paypalBearerAuth 
+          Testng annotations used  
+	  		@Test
+          Request end point -  https://api.sandbox.paypal.com/v1/catalogs/products
+       	  Request Authorization - bearer
           Request Method type - POST
-          Request Headers -
+          Request Headers - headerList.add(new Header("Authorization","Bearer "+paypalBearerAuth)) 
           Request Body - sample request : 
                     {
                       "name": "body within body",
@@ -190,4 +192,56 @@
                     verify Expected content type = JSON and actual response content type
                     assertTrue(resp.contentType().toLowerCase().contains("json"),"Expected content type = JSON and actual :" + resp.contentType());
           
+          
+3.src/main/java/week1/day1/paypal/CreateMultipleProducts.java 
+          
+          extends PayPalBasics -- for Bearer token "String paypalBearerAuth " 
+	  Testng annotations used  
+	  		@Test
+	  Testng attributes used 
+	  		@Test(dataProvider = "createpaypalapp") -- dataprovider created in PayPalBasics.java
+          Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
+          Request Authorization - bearer
+          Request Method type - POST
+          Request Headers - headerList.add(new Header("Authorization","Bearer "+paypalBearerAuth)) 
+          Request Content type - ContentType.JSON
+	  Request Body - Json file fetched from dataprovider
+          Response : JsonPath jsonresp = resp.jsonPath()
+	  productIds.add(jsonresp.get("id").toString())  -- arrayList created in PayPalBasic.java to store productids created
+                    verify Expected status code : 201 
+                    assertTrue(resp.getStatusCode() == 201, "Expected status code : 201 and actual :" + resp.getStatusCode());
+ 
+                    verify Expected response time < 600 and actual response time
+                    assertTrue(resp.getTime()<  600,"Expected response time < 600 and actual :" + resp.getTime());
+		
+                    verify Expected content type = JSON and actual response content type
+                    assertTrue(resp.contentType().toLowerCase().contains("json"),"Expected content type = JSON and actual :" + resp.contentType());
+
+4.src/main/java/week1/day1/paypal/ListCreatedProducts.java 
+          
+          extends PayPalBasics -- for Bearer token "String paypalBearerAuth " 
+	  Testng annotations used  
+	  		@Test
+	  Request end point - https://api.sandbox.paypal.com/v1/catalogs/products
+          Request Authorization - bearer
+          Request Method type - POST
+	  Request Params - "page_size": "100" -- since response is returning default 1 page with 10 product records created, this param is used to return 100 records per 1 page
+          Request Headers - headerList.add(new Header("Authorization","Bearer "+paypalBearerAuth)) 
+          Request Content type - ContentType.JSON
+	 
+	 
+          Response : JsonPath jsonresp = resp.jsonPath()
+	 	    List<String> prodIDList = jsonresp.getList("products.id")  -- arrayList to get all product ids from json response
+		    
+		    verify if created product is listed in response by iterating through productIds(list stored product id's created in list)
+		    assertTrue(prodIDList.contains(productIds.get(index)), "Product is not listed");
+                    
+		    verify Expected status code : 200
+                    assertTrue(resp.getStatusCode() == 200, "Expected status code : 200 and actual :" + resp.getStatusCode());
+ 
+                    verify Expected response time < 600 and actual response time
+                    assertTrue(resp.getTime()<  600,"Expected response time < 600 and actual :" + resp.getTime());
+		
+                    verify Expected content type = JSON and actual response content type
+                    assertTrue(resp.contentType().toLowerCase().contains("json"),"Expected content type = JSON and actual :" + resp.contentType());
           
