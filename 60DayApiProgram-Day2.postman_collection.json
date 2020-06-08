@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "9e692f47-13ef-4022-b967-550f0c7c43c3",
+		"name": "60DayApiProgram-Day2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "day2",
+			"item": [
+				{
+					"name": "BestBuy",
+					"item": [
+						{
+							"name": "ProductAvailabilityPostalCode-Attribute",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(postalCode=55109)+products(search=iphone 8 plus&search=rugged case&manufacturer=Apple)?format=json&show=storeId,name,address&apiKey={{bestbuyapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(postalCode=55109)+products(search=iphone 8 plus&search=rugged case&manufacturer=Apple)"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "show",
+											"value": "storeId,name,address"
+										},
+										{
+											"key": "apiKey",
+											"value": "{{bestbuyapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ProductAvailabilityPostalCode-AreaFun",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(area(02864,20))+products(search=iphone 8 plus&search=rugged case&manufacturer=Apple)?format=json&show=storeId,name,address,distance&apiKey={{bestbuyapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(area(02864,20))+products(search=iphone 8 plus&search=rugged case&manufacturer=Apple)"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "show",
+											"value": "storeId,name,address,distance"
+										},
+										{
+											"key": "apiKey",
+											"value": "{{bestbuyapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CanonProductsPriceRange$1000-$1500",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(manufacturer=canon&salePrice>1000&salePrice<1500)?show=sku,name,salePrice&format=json&apiKey={{bestbuyapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(manufacturer=canon&salePrice>1000&salePrice<1500)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "sku,name,salePrice"
+										},
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "apiKey",
+											"value": "{{bestbuyapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ProductRegularAndSellingPRICE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(manufacturer=apple&search=iPhone 11 Pro 64GB)?format=json&show=name,regularPrice,salePrice&apiKey={{bestbuyapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(manufacturer=apple&search=iPhone 11 Pro 64GB)"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "show",
+											"value": "name,regularPrice,salePrice"
+										},
+										{
+											"key": "apiKey",
+											"value": "{{bestbuyapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "StorePickupTrue",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(manufacturer=apple&search=iPhone 11 Pro 64GB&inStorePickup=true)+stores(region=RI)?format=json&show=name,stores.storeId,stores.name&apiKey={{bestbuyapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(manufacturer=apple&search=iPhone 11 Pro 64GB&inStorePickup=true)+stores(region=RI)"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "show",
+											"value": "name,stores.storeId,stores.name"
+										},
+										{
+											"key": "apiKey",
+											"value": "{{bestbuyapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "apikey",
+						"apikey": [
+							{
+								"key": "key",
+								"value": "bestbuyApiKey",
+								"type": "string"
+							},
+							{
+								"key": "value",
+								"value": "qUh3qMK14GdwAs9bO59QRSCJ",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8c9f28d2-815a-4833-b593-4b0f7d84dd64",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "40d0dec0-cf3b-40e6-b4e3-0027cd6f6368",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "WeatherMap",
+					"item": [
+						{
+							"name": "RainAndHaze",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "api.openweathermap.org/data/2.5/weather?q=hyderabad,india&APPID={{weatherMapApiKey}}",
+									"host": [
+										"api",
+										"openweathermap",
+										"org"
+									],
+									"path": [
+										"data",
+										"2.5",
+										"weather"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "hyderabad,india"
+										},
+										{
+											"key": "APPID",
+											"value": "{{weatherMapApiKey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "onecall",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.openweathermap.org/data/2.5/onecall?lat=17.37528&lon=78.474442&\nexclude=hourly,daily&appid={{weatherMapApiKey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"openweathermap",
+										"org"
+									],
+									"path": [
+										"data",
+										"2.5",
+										"onecall"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "17.37528"
+										},
+										{
+											"key": "lon",
+											"value": "78.474442"
+										},
+										{
+											"key": "\nexclude",
+											"value": "hourly,daily"
+										},
+										{
+											"key": "appid",
+											"value": "{{weatherMapApiKey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c9b2b5a1-972f-495a-8c91-c21a7467148d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "db9e09aa-6300-44c4-9eb1-944263a0e937",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "abc2fb08-b802-4a2d-b1d0-0e11851206a3",
+			"key": "bestbuyapikey",
+			"value": "qUh3qMK14GdwAs9bO59QRSCJ",
+			"type": "string"
+		},
+		{
+			"id": "801e748a-97a2-469d-be63-6a792d981e91",
+			"key": "weatherMapApiKey",
+			"value": "63ba265769b16344f4f41db6bcd793f3",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
