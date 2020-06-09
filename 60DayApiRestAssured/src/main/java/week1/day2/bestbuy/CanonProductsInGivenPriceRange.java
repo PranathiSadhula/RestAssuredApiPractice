@@ -14,7 +14,7 @@ import io.restassured.response.Response;
 public class CanonProductsInGivenPriceRange {
 	
 	@Test
-	public void productAvailabilityPostalCodeWithAreaFun() {
+	public void CanonProductsInGivenPriceRange() {
 		// Step1 : Base url setup
 				RestAssured.baseURI = "https://api.bestbuy.com/v1";
 				
