@@ -14,7 +14,7 @@ import io.restassured.response.Response;
 public class StorePickUpTrue {
 	
 	@Test
-	public void productAvailabilityPostalCodeWithAreaFun() {
+	public void StorePickUpTrue () {
 		// Step1 : Base url setup
 				RestAssured.baseURI = "https://api.bestbuy.com/v1";
 				
