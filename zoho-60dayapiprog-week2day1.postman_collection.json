@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "eda054db-650d-4f7f-ac47-17ea9bfa297c",
+		"name": "zoho-60dayapiprog-week2day1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AccessAndRefreshToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52defc3e-b292-4bcb-85b3-42baaba1ca4d",
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"access_token\", resp.access_token);\r",
+							"pm.globals.set(\"refresh_token\", resp.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.zoho.com/oauth/v2/token?code=1000.461f458a5f941cee3ebf1a5f70ce061c.dbaa0d7e2e8b31e876911cc405db653e&client_id=1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH&client_secret=0cfc3fd847763633458045d00480193e87b50155c7&redirect_uri=http://www.zoho.com/subscriptions&grant_type=authorization_code",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "1000.461f458a5f941cee3ebf1a5f70ce061c.dbaa0d7e2e8b31e876911cc405db653e"
+						},
+						{
+							"key": "client_id",
+							"value": "1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH"
+						},
+						{
+							"key": "client_secret",
+							"value": "0cfc3fd847763633458045d00480193e87b50155c7"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://www.zoho.com/subscriptions"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						},
+						{
+							"key": "expires_in",
+							"value": "7200",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GenerateAccessTokenFromRefreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.ab915996fef65c6c04fc0fcf01383a11.dacfed59c82632dfa3c1c017e71ee61a&client_id=1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH&client_secret=0cfc3fd847763633458045d00480193e87b50155c7&redirect_uri=http://www.zoho.com/subscriptions&grant_type=authorization_code",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "refresh_token",
+							"value": "1000.ab915996fef65c6c04fc0fcf01383a11.dacfed59c82632dfa3c1c017e71ee61a"
+						},
+						{
+							"key": "client_id",
+							"value": "1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH"
+						},
+						{
+							"key": "client_secret",
+							"value": "0cfc3fd847763633458045d00480193e87b50155c7"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://www.zoho.com/subscriptions"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCustomer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37975faa-3d30-443a-91a1-f8961aa0f9bc",
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"console.log(resp.customer.customer_id);\r",
+							"pm.globals.set(\"customer_id\", resp.customer.customer_id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Zoho-oauthtoken 1000.e210c9b00006dd2fd6f9d7f200ff5855.b30abab11899b662b5346a31cd9f49cc",
+						"type": "text"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"value": "717079474",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"display_name\": \"rest api 60 day practice testing in zoho customer creatation via api 13\",\r\n    \"first_name\": \"create customer\",\r\n    \"last_name\": \"via api\",\r\n    \"email\": \"pranathisadhula@gmail.com\"\r\n   \r\n}"
+				},
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b456c0da-a019-4ef7-b0be-fbf6074f31d4",
+						"exec": [
+							"\r",
+							"\r",
+							"var resp = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"    \r",
+							"                pm.test(\"verify if customerid exists in list\", function () {\r",
+							"                      if(resp.customers.includes (pm.globals.get(\"customer_id\" ))){\r",
+							"                          console.log(\"customer_id\");\r",
+							"                          return true;\r",
+							"                       } \r",
+							"                    });\r",
+							"            \r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Zoho-oauthtoken 1000.e210c9b00006dd2fd6f9d7f200ff5855.b30abab11899b662b5346a31cd9f49cc"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"type": "text",
+						"value": "717079474"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCustomer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1300f5a2-14e1-47ce-883c-ebf032bdf95b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Zoho-oauthtoken 1000.e210c9b00006dd2fd6f9d7f200ff5855.b30abab11899b662b5346a31cd9f49cc"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"type": "text",
+						"value": "717079474"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"display_name\": \"rest api 60 day practice testing in zoho customer creatation via api 8\",\r\n    \"first_name\": \"create customer\",\r\n    \"last_name\": \"via api\",\r\n    \"email\": \"pranathisadhula@gmail.com\",\r\n    \"shipping_address\": {\r\n        \"attention\": \"Benjamin George\",\r\n        \"street\": \"Harrington Bay Street\",\r\n        \"city\": \"Salt Lake City\",\r\n        \"state\": \"CA\",\r\n        \"zip\": 92612,\r\n        \"country\": \"U.S.A\",\r\n        \"fax\": 4527389\r\n    },\r\n   \"mobile\": \"9047769735\"\r\n}"
+				},
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers/{{customer_id}}",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCustomer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "551e1f73-f058-4840-9b0a-d73d5236fbee",
+						"exec": [
+							"\r",
+							"\r",
+							"var resp = pm.response.json();\r",
+							"\r",
+							"\r",
+							"  \r",
+							"                pm.test(\"verify if customerid deleted in list\", function () {\r",
+							"                      if(!resp.customers.includes(pm.globals.get(\"customer_id\" ))){\r",
+							"                          console.log(\"customer_id is deleted \"+pm.globals.get(\"customer_id\" ));\r",
+							"                       } \r",
+							"                    });\r",
+							"            \r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Zoho-oauthtoken 1000.e210c9b00006dd2fd6f9d7f200ff5855.b30abab11899b662b5346a31cd9f49cc"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"type": "text",
+						"value": "717079474"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers/{{customer_id}}",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e7546c27-2596-4dd2-a187-bb9429c14059",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "65fe1027-fa8f-4c71-9c2e-ac438c8dd26b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b270d52b-56c3-4497-9b3e-e1cd73b992d1",
+			"key": "access_token",
+			"value": "1000.f89fe948017205d939cdb8e262c5fed6.7ae366434cf3fd5db4a9df16f4e31595",
+			"type": "string"
+		},
+		{
+			"id": "38d8ab46-9b71-404d-9357-657594c1005d",
+			"key": "refresh_token",
+			"value": "1000.1c22cb15dcfcf31c4fde093d575aa39d.85581da0085e8bfa461ae7fc948103ce",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
