@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "03c79a98-7592-4718-84ab-cd9da27bf581",
+		"name": "WeatherMap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RainVolumeOfMumbai",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f132fb26-cde0-42ea-81b9-503bcbdaf0ed",
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"\r",
+							"var rainVol = 0;\r",
+							"resp.hourly.forEach(function(entry){\r",
+							"   rainVol = rainVol+entry.rain[\"1h\"];\r",
+							"});\r",
+							"\r",
+							"console.log(\"rain volume in MUMBAI for 3days :\"+rainVol);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/onecall?appid=63ba265769b16344f4f41db6bcd793f3&start=1592132848407&lon=72.8777&end=1592392048407&lat=19.0760",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"onecall"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "63ba265769b16344f4f41db6bcd793f3"
+						},
+						{
+							"key": "start",
+							"value": "1592132848407"
+						},
+						{
+							"key": "lon",
+							"value": "72.8777"
+						},
+						{
+							"key": "end",
+							"value": "1592392048407"
+						},
+						{
+							"key": "lat",
+							"value": "19.0760"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MajorCitiesWeather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45dff8bb-539d-47dd-b402-1594012b2930",
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"\r",
+							"\r",
+							"for(var i = 0; i < resp.list.length; i++){\r",
+							"    resp.list[i].weather.forEach(function(entry){\r",
+							"        if(entry.main == \"Rain\"  || entry.main == \"Haze\" ){\r",
+							"            console.log(resp.list[i].name+\" === \"+  entry.main);\r",
+							"        } ;\r",
+							"});\r",
+							"};\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/find?apiKey=63ba265769b16344f4f41db6bcd793f3&cnt=50&lon=78.8718&lat=21.7679",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"find"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "63ba265769b16344f4f41db6bcd793f3"
+						},
+						{
+							"key": "cnt",
+							"value": "50"
+						},
+						{
+							"key": "lon",
+							"value": "78.8718"
+						},
+						{
+							"key": "lat",
+							"value": "21.7679"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
