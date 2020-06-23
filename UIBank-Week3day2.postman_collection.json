@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "9530b34e-507c-42b9-b856-6b8fcec9902a",
+		"name": "UIBank-Week3day2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RegisterUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"firstName\": \"lakshmi\",\r\n\"title\": \"mrs\",\r\n\"lastName\": \"Sadhula\",\r\n\"gender\": \"female\",\r\n\"age\": \"30/11/91\",\r\n\"email\": \"sruthir91@gmail.com\",\r\n\"employmentStatus\": \"Full-time\",\r\n\"firstName\": \"lakshmi\",\r\n\"gender\": \"female\",\r\n\"lastName\": \"Sadhula\",\r\n\"maritalStatus\": \"Married\",\r\n\"password\": \"Pranathi75#\",\r\n\"title\": \"mrs\",\r\n\"type\": \"customer\",\r\n\"username\": \"sruthir\"\r\n}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fcd41f2-96cf-4e07-9aa7-1637295c50a2",
+						"exec": [
+							"var resp = pm.response.json() ;\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"userId\", resp.userId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"lakshmisadhula\",\"password\":\"Pranathi75#\"}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/login",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "404f17ba-8f32-454e-882f-9ef0fbc91035",
+						"exec": [
+							"var resp = pm.response.json() ;\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"accountId\", resp.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Authorization",
+						"value": "5C2q23WDAidmBPdQaTQwiJQ1HJZIWosYnfqkmMlIgKF8opmBCrlRKBPAEucQUU8d"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"friendlyName\":\"lakshmisadhula1\",\"type\":\"savings\",\"userId\":\"{{userId}}\",\"balance\":100,\"accountNumber\":22375604}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/accounts",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccountDetails",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Authorization",
+						"value": "5C2q23WDAidmBPdQaTQwiJQ1HJZIWosYnfqkmMlIgKF8opmBCrlRKBPAEucQUU8d"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/accounts?filter[where][userId]={{userId}}",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "filter[where][userId]",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApplyLoan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e070358-2831-4fe8-a722-2b8eb2124165",
+						"exec": [
+							"var resp = pm.response.json() ;\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"quoteid\", resp.quoteid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"pranathisadhula@gmail.com\",\"amount\":5000,\"term\":1,\"income\":690000,\"age\":30}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/newquote",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"newquote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoanStatus",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/{{quoteid}}",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"{{quoteid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://github.com/PranathiSadhula/workspace/tree-commit/feee350a2ae41282b060452def1105bc629bc086/60DayApi/src/main/java/week3/day2/uibank",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest"
+					}
+				],
+				"url": {
+					"raw": "https://github.com/PranathiSadhula/workspace/tree-commit/feee350a2ae41282b060452def1105bc629bc086/60DayApi/src/main/java/week3/day2/uibank",
+					"protocol": "https",
+					"host": [
+						"github",
+						"com"
+					],
+					"path": [
+						"PranathiSadhula",
+						"workspace",
+						"tree-commit",
+						"feee350a2ae41282b060452def1105bc629bc086",
+						"60DayApi",
+						"src",
+						"main",
+						"java",
+						"week3",
+						"day2",
+						"uibank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://github.com/PranathiSadhula/workspace/file-list/master/60DayApi/src/main/java/week3/day2/uibank",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest"
+					}
+				],
+				"url": {
+					"raw": "https://github.com/PranathiSadhula/workspace/file-list/master/60DayApi/src/main/java/week3/day2/uibank",
+					"protocol": "https",
+					"host": [
+						"github",
+						"com"
+					],
+					"path": [
+						"PranathiSadhula",
+						"workspace",
+						"file-list",
+						"master",
+						"60DayApi",
+						"src",
+						"main",
+						"java",
+						"week3",
+						"day2",
+						"uibank"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
