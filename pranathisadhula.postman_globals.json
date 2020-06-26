@@ -1,0 +1,119 @@
+{
+	"id": "7eafb6d7-126e-4444-811a-3021d6fd5698",
+	"values": [
+		{
+			"key": "sys_id_change_request",
+			"value": "change_request",
+			"enabled": true
+		},
+		{
+			"key": "usr_sys_id",
+			"value": "usr_sys_id",
+			"enabled": true
+		},
+		{
+			"key": "initial_issue_count",
+			"value": "initial_issue_count",
+			"enabled": true
+		},
+		{
+			"key": "current_issue_count",
+			"value": "current_issue_count",
+			"enabled": true
+		},
+		{
+			"key": "jira_issue_id_rndm",
+			"value": "jira_issue_id_rndm",
+			"enabled": true
+		},
+		{
+			"key": "jira_issue_id_attachment",
+			"value": "id",
+			"enabled": true
+		},
+		{
+			"key": "expectedCreatedTime",
+			"value": "expectedCreatedTime",
+			"enabled": true
+		},
+		{
+			"key": "product_resp",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "customer_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "X-Signature",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "lastUpdateTime",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "hotelCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "bookableRateKey",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "booking_reference",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "accountId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "quoteid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "adminKey",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "project_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regenaratedadminKey",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2020-06-26T14:07:59.346Z",
+	"_postman_exported_using": "Postman/7.22.1"
+}

@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "39a76731-ea58-4b0b-989c-b3669ac0f4b4",
+		"name": "tomtom-week4day1-60dayApoPractice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RegisterAdminKey",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11e71b92-d540-4ee4-9cab-3859f892787e",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.globals.set(\"adminKey\", resp.adminKey);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"secret\": \"MyNewGeofencingSecret\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}/register?key={{apikey}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegenerateAdminKey",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11e71b92-d540-4ee4-9cab-3859f892787e",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.globals.set(\"regenaratedadminKey\", resp.adminKey);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"secret\": \"MyNewGeofencingSecret\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}/regenerateKey?key={{apikey}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"regenerateKey"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0d0b9dd-43e7-4173-bd0c-a9931c48f4b6",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.globals.set(\"project_id\", resp.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"name\": \"MySecondGeofencingProject\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}/projects/project?key={{apikey}}&adminKey={{adminKey}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"projects",
+						"project"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "adminKey",
+							"value": "{{adminKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddFencing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0d0b9dd-43e7-4173-bd0c-a9931c48f4b6",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.globals.set(\"project_id\", resp.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"No-fly zone 23\",\r\n  \"type\": \"Feature\",\r\n  \"geometry\": {\r\n    \"radius\": 75,\r\n    \"type\": \"Point\",\r\n    \"shapeType\": \"Circle\",\r\n    \"coordinates\": [-67.137343, 45.137451]\r\n  },\r\n  \"properties\": {\r\n    \"maxSpeedKmh\": 70\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}/projects/{{project_id}}/fence?key={{apikey}}&adminKey={{regenaratedadminKey}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"projects",
+						"{{project_id}}",
+						"fence"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "adminKey",
+							"value": "{{regenaratedadminKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListProjects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0d0b9dd-43e7-4173-bd0c-a9931c48f4b6",
+						"exec": [
+							"var resp = pm.response.json();",
+							"",
+							"               pm.test(\"verify if project_id exists in list\", function () {",
+							"                   resp.projects.forEach(function(entry){",
+							"                      if(entry.id.includes (pm.globals.get(\"project_id\"))){",
+							"                          console.log(\"project_id exists :\");",
+							"                          return true;",
+							"                       } ",
+							"                    });",
+							"               });",
+							"            ",
+							"    ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseurl}}/projects?key={{apikey}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"projects"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
