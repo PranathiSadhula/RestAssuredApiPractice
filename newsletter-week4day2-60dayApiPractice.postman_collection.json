@@ -1,0 +1,534 @@
+{
+	"info": {
+		"_postman_id": "3a795e21-4c84-4ac1-9f14-4b25ada2dbd8",
+		"name": "newsletter-week4day2-60dayApiPractice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateNewList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57722867-e7a5-4f21-87a0-1096d43f1805",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.environment.set(\"list_id\", resp.value[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Psadhula list\",\r\n  \"uses_econda\": false,\r\n  \"uses_googleanalytics\": true,\r\n  \"has_opentracking\": true,\r\n  \"has_clicktracking\": true,\r\n  \"has_conversiontracking\": false,\r\n  \"imprint\": \"http://example.org/imprint\",\r\n  \"header_from_email\": \"from@example.org\",\r\n  \"header_from_name\": \"From Name\",\r\n  \"header_reply_email\": \"reply@example.org\",\r\n  \"header_reply_name\": \"Reply Name\",\r\n  \"tracking_url\": null,\r\n  \"landingpage\": \"http://example.org/unsubscribe-landingpage\",\r\n  \"use_ecg_list\": false\r\n}"
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/lists",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteList",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.newsletter2go.com/lists/{{list_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"lists",
+						"{{list_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateNewSegment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcf8fdd8-5c3b-4fc1-912f-91ed16f34670",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.environment.set(\"segment_id\", resp.value[0].id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"list_id\": \"{{list_id}}\",\r\n\t\"name\": \"New regular Segment\",\r\n\t\"is_dynamic\": false\r\n}"
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/groups",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSegment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcf8fdd8-5c3b-4fc1-912f-91ed16f34670",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"list_id\": \"{{list_id}}\",\r\n\t\"name\": \"updated segment\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/groups/{{segment_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"groups",
+						"{{segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1395b91e-798e-4b26-a147-968835c69fda",
+						"exec": [
+							"var resp = pm.response.json();",
+							"",
+							"resp.value.forEach(function(entry){",
+							"                      if(entry.id.includes(pm.environment.get(\"list_id\"))){",
+							"                          console.log(\"list_id exists\");",
+							"                         ",
+							"                       } ",
+							"                       else{",
+							"                            console.log(\"list_id doesnt exists\");  ",
+							"                        }",
+							"                    });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.newsletter2go.com/lists",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1395b91e-798e-4b26-a147-968835c69fda",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.environment.set(\"user_id\", resp.value[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.newsletter2go.com/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMyUserDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1395b91e-798e-4b26-a147-968835c69fda",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.newsletter2go.com/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUserDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1395b91e-798e-4b26-a147-968835c69fda",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"language\": \"en_UK\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSegment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1395b91e-798e-4b26-a147-968835c69fda",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.newsletter2go.com/lists/{{list_id}}/groups",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"lists",
+						"{{list_id}}",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ee5ca55-cd75-4d14-afa8-d771877ed2e4",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.environment.set(\"access_token\", resp.access_token);",
+							"pm.environment.set(\"refresh_token\", resp.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{auth_key_base64}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"{{user_name}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"grant_type\": \"https://nl2go.com/jwt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/oauth/v2/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ee5ca55-cd75-4d14-afa8-d771877ed2e4",
+						"exec": [
+							"var resp = pm.response.json();",
+							"pm.environment.set(\"access_token\", resp.access_token);",
+							"pm.environment.set(\"refresh_token\", resp.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Basic {{auth_key_base64}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"refresh_token\": \"{{refresh_token}}\",\r\n  \"grant_type\": \"https://nl2go.com/jwt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.newsletter2go.com/oauth/v2/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"newsletter2go",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
